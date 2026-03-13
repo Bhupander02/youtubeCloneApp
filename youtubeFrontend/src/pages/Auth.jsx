@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
-export default function Auth() {
+export default function Auth({ setCurrentUser }) {
   const [isLogin, setIsLogin] = useState(true);
   const [formData, setFormData] = useState({
-    userName: "",
+    username: "",
     email: "",
     password: "",
   });
@@ -14,21 +15,37 @@ export default function Auth() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!isLogin) {
-      alert("Registeration succesful! Redirecting to Login.. ");
-      setIsLogin(true);
-    } else {
-      alert("Login Sucessful");
-      navigate("/");
+    try {
+      const endpoint = isLogin ? '/api/auth/login' : '/api/auth/register';
+      const res = await axios.post(`http://localhost:5000${endpoint}`, formData);
+      
+      if (res.data && res.data.user) {
+        // Flatten the data: Put the token inside the user object for easy storage
+        const userData = {
+          ...res.data.user,
+          token: res.data.token
+        };
+
+        // 1. Save to LocalStorage
+        localStorage.setItem('currentUser', JSON.stringify(userData));
+        
+        // 2. Update Global State
+        setCurrentUser(userData);
+        
+        alert(res.data.message);
+        navigate('/');
+      }
+    } catch (err) {
+      console.error("Auth Error:", err);
+      alert(err.response?.data?.message || "Authentication failed!");
     }
   };
 
   return (
     <div className="flex flex-col items-center justify-center min-h-[80vh]">
       <div className="bg-white p-8 border border-gray-300 rounded-lg shadow-sm w-full max-w-[450px]">
-        {/* Google-style Logo Placeholder */}
         <div className="text-center mb-6">
           <h1 className="text-2xl font-semibold text-gray-800">
             {isLogin ? "Sign in" : "Create account"}
