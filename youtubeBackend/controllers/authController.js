@@ -1,4 +1,3 @@
-// controllers/authController.js
 import User from '../models/User.js';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
@@ -30,9 +29,17 @@ export const register = async (req, res) => {
     // 4. Save to database
     await newUser.save();
 
-    // 5. Send success response (without the password!)
+    // 5. Generate JWT Token immediately so they are logged in upon signup
+    const token = jwt.sign(
+      { id: newUser._id, username: newUser.username },
+      process.env.JWT_SECRET,
+      { expiresIn: '1d' }
+    );
+
+    // 6. Send success response with token and user info
     res.status(201).json({
       message: "User registered successfully",
+      token,
       user: {
         id: newUser._id,
         username: newUser.username,
@@ -70,7 +77,7 @@ export const login = async (req, res) => {
     const token = jwt.sign(
       { id: user._id, username: user.username },
       process.env.JWT_SECRET,
-      { expiresIn: '1d' } // Token expires in 1 day
+      { expiresIn: '1d' }
     );
 
     // 4. Send success response with token

@@ -74,3 +74,15 @@ export const deleteVideo = async (req, res) => {
     res.status(500).json({ message: "Failed to delete video" });
   }
 };
+
+// GET videos by a specific User (for the Channel Page)
+export const getVideosByUser = async (req, res) => {
+  try {
+    // We look for videos where 'uploader' matches the ID from the URL params
+    const videos = await Video.find({ uploader: req.params.userId });
+    res.status(200).json(videos);
+  } catch (error) {
+    console.error("Error fetching user videos:", error);
+    res.status(500).json({ message: "Failed to fetch channel videos" });
+  }
+};

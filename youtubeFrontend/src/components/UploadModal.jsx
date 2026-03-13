@@ -14,28 +14,26 @@ export default function UploadModal({ setOpen, currentUser }) {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  // src/components/UploadModal.jsx
+
   const handleUpload = async (e) => {
     e.preventDefault();
     try {
-      // 1. Get the token from our currentUser object
       const token = currentUser?.token;
-
-      // 2. Prepare the data (matching your Video model uploaderId)
       const videoData = { ...formData, uploaderId: currentUser.id };
 
-      // 3. Make the PROTECTED request
       await axios.post("http://localhost:5000/api/videos", videoData, {
         headers: {
-          token: `Bearer ${token}`, // This name must match your middleware check
+          Authorization: `Bearer ${token}`,
         },
       });
 
       alert("Video uploaded successfully!");
       setOpen(false);
-      window.location.reload(); // Refresh to see the new video
+      window.location.reload();
     } catch (err) {
       console.error(err);
-      alert(err.response?.data?.message || "Upload failed. Check your token!");
+      alert(err.response?.data?.message || "Upload failed.");
     }
   };
 
