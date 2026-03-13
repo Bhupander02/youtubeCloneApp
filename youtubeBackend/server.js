@@ -6,6 +6,7 @@ import dotenv from 'dotenv';
 import authRoutes from './routes/auth.js'; 
 import videoRoutes from './routes/video.js';
 import commentRoutes from './routes/comment.js'
+import channelRoutes from './routes/channel.js';
 
 // Load variables from .env file
 dotenv.config();
@@ -25,6 +26,7 @@ app.get('/', (req, res) => {
 app.use('/api/auth', authRoutes);
 app.use('/api/videos', videoRoutes);
 app.use('/api/comments', commentRoutes);
+app.use('/api/channels', channelRoutes);
 
 // Database Connection
 mongoose.connect(process.env.MONGO_URI)
