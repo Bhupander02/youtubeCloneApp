@@ -41,7 +41,7 @@ function App() {
           <main className="flex-1 overflow-y-auto bg-gray-50 p-4">
             <Routes>
               <Route path="/" element={<Home />} />
-              <Route path="/video/:videoId" element={<VideoPlayer />} />
+              <Route path="/video/:videoId" element={<VideoPlayer currentUser={currentUser} />} />
 
               {/* Auth page gets the 'setCurrentUser' function to update the app on login */}
               <Route

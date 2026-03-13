@@ -13,11 +13,15 @@ export default function Channel({ currentUser }) {
   useEffect(() => {
     const fetchChannelData = async () => {
       try {
-        const res = await axios.get(`http://localhost:5000/api/channels/${channelId}`);
+        const res = await axios.get(
+          `http://localhost:5000/api/channels/${channelId}`,
+        );
         setChannel(res.data);
         setNotFound(false);
 
-        const videoRes = await axios.get(`http://localhost:5000/api/videos/user/${channelId}`);
+        const videoRes = await axios.get(
+          `http://localhost:5000/api/videos/user/${channelId}`,
+        );
         setVideos(videoRes.data);
       } catch (err) {
         if (err.response?.status === 404) {
@@ -29,18 +33,22 @@ export default function Channel({ currentUser }) {
   }, [channelId]);
 
   if (notFound) {
-    return <CreateChannelModal currentUser={currentUser} setChannel={setChannel} />;
+    return (
+      <CreateChannelModal
+        currentUser={currentUser}
+        setChannel={setChannel}
+        setNotFound={setNotFound}
+      />
+    );
   }
 
   if (!channel) return <div className="p-10">Loading...</div>;
 
   return (
     <div className="max-w-6xl mx-auto p-4">
-      {/* ... (Existing Channel Header using channel.channelName) ... */}
-      
       <div className="flex items-center gap-6 mb-8 border-b pb-8">
         <div className="w-24 h-24 rounded-full bg-purple-600 flex items-center justify-center text-4xl font-bold text-white">
-          {channel.channelName[0].toUpperCase()}
+          {channel.channelName?.[0].toUpperCase() || "C"}
         </div>
         <div>
           <h1 className="text-3xl font-bold">{channel.channelName}</h1>
@@ -49,13 +57,27 @@ export default function Channel({ currentUser }) {
       </div>
 
       {/* Videos List */}
+      <h2 className="text-xl font-bold mb-4">Uploads</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        {videos.map(v => (
-           <div key={v._id}>
-             <img src={v.thumbnailUrl} className="rounded-xl w-full" />
-             <h3 className="font-bold mt-2">{v.title}</h3>
-           </div>
-        ))}
+        {videos.length > 0 ? (
+          videos.map((v) => (
+            <div key={v._id} className="cursor-pointer group">
+              <img
+                src={v.thumbnailUrl}
+                className="rounded-xl w-full aspect-video object-cover"
+                alt={v.title}
+              />
+              <h3 className="font-bold mt-2 group-hover:text-blue-600">
+                {v.title}
+              </h3>
+              <p className="text-sm text-gray-500">{v.views || 0} views</p>
+            </div>
+          ))
+        ) : (
+          <p className="text-gray-500 italic col-span-full">
+            No videos uploaded yet.
+          </p>
+        )}
       </div>
     </div>
   );
