@@ -9,26 +9,31 @@ This project replicates core YouTube functionality including **authentication, v
 # 🚀 Features
 
 ## 🔐 User Authentication
+
 - Secure **User Registration & Login**
 - Authentication using **JWT (JSON Web Tokens)**
 - Password hashing with **bcrypt**
 
 ## 📺 Video Hosting
+
 - Upload and stream videos
 - Video playback with a dedicated player page
 - Track **views, categories, and metadata**
 
 ## 📂 Channel Management
+
 - Users can create and manage their own **channels**
 - Upload videos to personal channels
 - Channel pages displaying uploaded content
 
 ## 🔍 Intelligent Search
+
 - Real-time search functionality
 - **Regex-based title matching**
 - Dedicated **search results page**
 
 ## 💬 Engagement Tools
+
 - Comment system with full **CRUD functionality**
 - Users can:
   - Post comments
@@ -37,6 +42,7 @@ This project replicates core YouTube functionality including **authentication, v
 - **Like / Dislike** interaction system
 
 ## 🎨 Responsive UI
+
 - Built using **Tailwind CSS**
 - Toggleable sidebar navigation
 - Category filters on the homepage
@@ -47,6 +53,7 @@ This project replicates core YouTube functionality including **authentication, v
 # 🛠️ Tech Stack
 
 ## Frontend
+
 - React.js
 - Tailwind CSS
 - React Router DOM
@@ -54,13 +61,16 @@ This project replicates core YouTube functionality including **authentication, v
 - Timeago.js
 
 ## Backend
+
 - Node.js
 - Express.js
 
 ## Database
+
 - MongoDB Atlas (NoSQL)
 
 ## Authentication
+
 - JWT (JSON Web Tokens)
 - Bcrypt.js
 
@@ -189,15 +199,14 @@ youtubeFrontend/
 
 # 📊 Requirements Implemented
 
-- ✅ Minimum **6 category filters** on the homepage  
-- ✅ Functional **video player page**  
-- ✅ **Search system** with results page  
-- ✅ **Channel creation** feature  
+- ✅ Minimum **6 category filters** on the homepage
+- ✅ Functional **video player page**
+- ✅ **Search system** with results page
+- ✅ **Channel creation** feature
 - ✅ Full **CRUD operations for comments**
-
+eix
 ---
 
 # 👨‍💻 Author
 
 Developed as a **Full Stack MERN Project** to demonstrate modern web development skills.
-
