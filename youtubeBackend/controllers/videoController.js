@@ -86,3 +86,17 @@ export const getVideosByUser = async (req, res) => {
     res.status(500).json({ message: "Failed to fetch channel videos" });
   }
 };
+
+export const searchVideos = async (req, res) => {
+  const query = req.query.q;
+  try {
+    // Uses regex to find titles containing the search query (case-insensitive)
+    const videos = await Video.find({
+      title: { $regex: query, $options: "i" },
+    }).populate("uploader", "username avatar");
+    
+    res.status(200).json(videos);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+};
