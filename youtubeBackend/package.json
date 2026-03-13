@@ -19,5 +19,7 @@
     "mongodb": "^7.1.0",
     "mongoose": "^9.3.0",
     "nodemon": "^3.1.14"
-  }
+  },
+  "devDependencies": {},
+  "keywords": []
 }

@@ -1,32 +1,38 @@
-// models/User.js
+// server.js
+import express from 'express';
 import mongoose from 'mongoose';
+import cors from 'cors';
+import dotenv from 'dotenv';
+import authRoutes from './routes/auth.js'; 
+import videoRoutes from './routes/video.js';
 
-const userSchema = new mongoose.Schema({
-  username: {
-    type: String,
-    required: true,
-    unique: true,
-    trim: true
-  },
-  email: {
-    type: String,
-    required: true,
-    unique: true,
-    trim: true,
-    lowercase: true
-  },
-  password: {
-    type: String,
-    required: true
-  },
-  avatar: {
-    type: String,
-    default: "https://example.com/avatar/default.png" // Default avatar
-  },
-  channels: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Channel'
-  }]
-}, { timestamps: true });
+// Load variables from .env file
+dotenv.config();
 
-export default mongoose.model('User', userSchema);
+const app = express();
+const PORT = process.env.PORT || 5000;
+
+// Middleware
+app.use(cors()); 
+app.use(express.json()); 
+
+// Test Route
+app.get('/', (req, res) => {
+  res.send('YouTube Clone API is running!');
+});
+
+app.use('/api/auth', authRoutes);
+app.use('/api/videos', videoRoutes);
+
+// Database Connection
+mongoose.connect(process.env.MONGO_URI)
+  .then(() => {
+    console.log('✅ Successfully connected to MongoDB Atlas');
+    // Start the server only after connecting to the DB
+    app.listen(PORT, () => {
+      console.log(`🚀 Server is running on http://localhost:${PORT}`);
+    });
+  })
+  .catch((error) => {
+    console.error('❌ MongoDB connection error:', error);
+  });
