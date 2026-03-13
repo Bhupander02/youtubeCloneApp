@@ -1,16 +1,203 @@
-# React + Vite
+# 🎬 YouTube Clone – Full Stack Video Platform
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A high-performance **full-stack video sharing platform** built using the **MERN Stack (MongoDB, Express, React, Node.js)**.
 
-Currently, two official plugins are available:
+This project replicates core YouTube functionality including **authentication, video uploads, channel creation, search functionality, and an interactive comment system**.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+# 🚀 Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🔐 User Authentication
+- Secure **User Registration & Login**
+- Authentication using **JWT (JSON Web Tokens)**
+- Password hashing with **bcrypt**
 
-## Expanding the ESLint configuration
+## 📺 Video Hosting
+- Upload and stream videos
+- Video playback with a dedicated player page
+- Track **views, categories, and metadata**
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 📂 Channel Management
+- Users can create and manage their own **channels**
+- Upload videos to personal channels
+- Channel pages displaying uploaded content
+
+## 🔍 Intelligent Search
+- Real-time search functionality
+- **Regex-based title matching**
+- Dedicated **search results page**
+
+## 💬 Engagement Tools
+- Comment system with full **CRUD functionality**
+- Users can:
+  - Post comments
+  - Edit comments
+  - Delete comments
+- **Like / Dislike** interaction system
+
+## 🎨 Responsive UI
+- Built using **Tailwind CSS**
+- Toggleable sidebar navigation
+- Category filters on the homepage
+- Clean and modern design
+
+---
+
+# 🛠️ Tech Stack
+
+## Frontend
+- React.js
+- Tailwind CSS
+- React Router DOM
+- Axios
+- Timeago.js
+
+## Backend
+- Node.js
+- Express.js
+
+## Database
+- MongoDB Atlas (NoSQL)
+
+## Authentication
+- JWT (JSON Web Tokens)
+- Bcrypt.js
+
+---
+
+# 💻 Getting Started
+
+Follow these steps to run the project locally.
+
+---
+
+# 📋 Prerequisites
+
+Make sure you have installed:
+
+- Node.js
+- npm
+- MongoDB Atlas account
+
+---
+
+# ⚙️ Backend Setup
+
+1. Navigate to the backend folder
+
+```bash
+cd youtubeBackend
+```
+
+2. Install dependencies
+
+```bash
+npm install
+```
+
+3. Create a `.env` file in the root directory and add:
+
+```
+MONGO_URI=your_mongodb_connection_string
+JWT_SECRET=your_secret_key
+PORT=5000
+```
+
+4. Start the backend server
+
+```bash
+npm start
+```
+
+---
+
+# 💻 Frontend Setup
+
+1. Navigate to the frontend folder
+
+```bash
+cd youtubeFrontend
+```
+
+2. Install dependencies
+
+```bash
+npm install
+```
+
+3. Start the development server
+
+```bash
+npm run dev
+```
+
+4. Open your browser and visit:
+
+```
+http://localhost:5173
+```
+
+---
+
+# 📁 Project Structure
+
+## Backend
+
+```
+youtubeBackend/
+│
+├── models/        # MongoDB Schemas
+│   ├── User.js
+│   ├── Channel.js
+│   ├── Video.js
+│   └── Comment.js
+│
+├── routes/        # API Routes
+│   ├── auth.js
+│   ├── video.js
+│   ├── channel.js
+│   └── comment.js
+│
+├── controllers/   # Business Logic
+├── middleware/    # JWT verification & security
+└── server.js
+```
+
+## Frontend
+
+```
+youtubeFrontend/
+│
+├── pages/         # Main pages
+│   ├── Home.jsx
+│   ├── VideoPlayer.jsx
+│   ├── Channel.jsx
+│   ├── Auth.jsx
+│   └── SearchResults.jsx
+│
+├── components/    # Reusable UI components
+│   ├── Header.jsx
+│   ├── Sidebar.jsx
+│   ├── SearchBar.jsx
+│   └── Modals.jsx
+│
+└── App.jsx
+```
+
+---
+
+# 📊 Requirements Implemented
+
+- ✅ Minimum **6 category filters** on the homepage  
+- ✅ Functional **video player page**  
+- ✅ **Search system** with results page  
+- ✅ **Channel creation** feature  
+- ✅ Full **CRUD operations for comments**
+
+---
+
+# 👨‍💻 Author
+
+Developed as a **Full Stack MERN Project** to demonstrate modern web development skills.
+
